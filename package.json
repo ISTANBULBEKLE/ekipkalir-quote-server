@@ -1,0 +1,15 @@
+{
+  "name": "ekipkalir-quote-server",
+  "version": "1.0.0",
+  "description": "This is the basic server for quote selection.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Ekip Kalir",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
