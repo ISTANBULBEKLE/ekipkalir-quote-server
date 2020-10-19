@@ -42,6 +42,18 @@ app.get("/quotes/search", function(request, response) {
   response.send(`You said you want to search for: ${word}`);
 });
 
+app.get('/quotes/search/word', function (req, res){
+  let word = req.query.word; 
+  let findQuotesMatching = (quotes, word)=>{
+  console.log(quotes);
+  return quotes.filter((q) => (q.quote.toLowerCase().includes(word)));
+
+  }
+  res.send(findQuotesMatching(quotes, word));
+
+
+})
+
 app.get ('/quotes/:theValue', function (request, response){
   console.log(request.params);
   response.send(request.params.theValue.toUpperCase())
@@ -58,8 +70,8 @@ function pickFromArray(arr) {
 }
 
 //Start our server so that it listens for HTTP requests!
-app.listen(3000, function () {
-  console.log("Server is listening on port 3000. Ready to accept requests!");
+app.listen(3001, function () {
+  console.log("Server is listening on port 3001. Ready to accept requests!");
 });
 
 
