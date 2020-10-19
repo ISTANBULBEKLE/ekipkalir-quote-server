@@ -51,7 +51,6 @@ app.get('/quotes/search/word', function (req, res){
   }
   res.send(findQuotesMatching(quotes, word));
 
-
 })
 
 app.get ('/quotes/:theValue', function (request, response){
