@@ -37,9 +37,14 @@ app.get("/quotes/random", function(request, response) {
   response.send(randomQuote);
 });
 
+app.get("/quotes/search", function(request, response) {
+  let word = request.query.word;  
+  response.send(`You said you want to search for: ${word}`);
+});
+
 app.get ('/quotes/:theValue', function (request, response){
-    console.log(request.params);
-response.send(request.params.theValue.toUpperCase())
+  console.log(request.params);
+  response.send(request.params.theValue.toUpperCase())
 });
 
 //...END OF YOUR CODE
@@ -56,3 +61,6 @@ function pickFromArray(arr) {
 app.listen(3000, function () {
   console.log("Server is listening on port 3000. Ready to accept requests!");
 });
+
+
+
