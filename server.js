@@ -27,36 +27,40 @@ app.get("/quotes", function(request, response) {
   response.sendFile(__dirname + "/quotes.json");
 });
 
-app.get("/search", function(request, response) {
-  let life = request.query.life;
-  response.send(`The search for life quotes ${life}`);
-});
-
 app.get("/quotes/random", function(request, response) {
   let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   response.send(randomQuote);
 });
 
-app.get("/quotes/search", function(request, response) {
-  let word = request.query.word;  
-  response.send(`You said you want to search for: ${word}`);
-});
-
-app.get('/quotes/search/word', function (req, res){
-  let word = req.query.word; 
-  let findQuotesMatching = (quotes, word)=>{
-  console.log(quotes);
-  return quotes.filter((q) => (q.quote.toLowerCase().includes(word)));
-
-  }
-  res.send(findQuotesMatching(quotes, word));
-
-})
-
 app.get ('/quotes/:theValue', function (request, response){
   console.log(request.params);
   response.send(request.params.theValue.toUpperCase())
 });
+
+app.get('/quotes/search/term', function (req, res){
+  let term = req.query.term;
+  res.send(`The search term you entered is: ${term}`);
+})
+
+/* app.get("/search", function(request, response) {
+  let life = request.query.life;
+  response.send(`The search for life quotes ${life}`);
+}); */
+
+
+/* app.get("/quotes/search", function(request, response) {
+  let word = request.query.word;  
+  response.send(`You said you want to search for: ${word}`);
+}); */
+
+app.get('/quotes/search/word', function (req, res){
+  let word = req.query.word; 
+  let findQuotesMatching = (quotes, word)=>{
+    console.log(quotes);
+    return quotes.filter((q) => (q.quote.toLowerCase().includes(word)));
+  }
+  res.send(findQuotesMatching(quotes, word));
+})
 
 //...END OF YOUR CODE
 
@@ -69,8 +73,8 @@ function pickFromArray(arr) {
 }
 
 //Start our server so that it listens for HTTP requests!
-app.listen(3001, function () {
-  console.log("Server is listening on port 3001. Ready to accept requests!");
+app.listen(3000, function () {
+  console.log("Server is listening on port 3000. Ready to accept requests!");
 });
 
 
