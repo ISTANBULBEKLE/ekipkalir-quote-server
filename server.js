@@ -13,6 +13,8 @@ const quotes = require("./quotes.json");
 //   /                  - Return some helpful welcome info (text)
 //   /quotes            - Should return all quotes (json)
 //   /quotes/random     - Should return ONE quote (json)
+let sample = require('lodash.sample');
+
 app.get("/", function(request, response) {
   response.send("Ekip's Quote Server!  Ask me for '/', /Hello, /quotes/random, or /quotes");
 });
@@ -32,10 +34,10 @@ app.get("/quotes/random", function(request, response) {
   response.send(randomQuote);
 });
 
-app.get ('/quotes/:theValue', function (request, response){
+/* app.get ('/quotes/:theValue', function (request, response){
   console.log(request.params);
   response.send(request.params.theValue.toUpperCase())
-});
+}); */
 
 app.get('/quotes/search/term', function (req, res){
   let term = req.query.term;
@@ -56,12 +58,24 @@ app.get('/quotes/search/term', function (req, res){
 app.get('/quotes/search/word', function (req, res){
   let word = req.query.word; 
   let findQuotesMatching = (quotes, word)=>{
-    console.log(quotes);
     return quotes.filter((q) => (q.quote.toLowerCase().includes(word)));
   }
   res.send(findQuotesMatching(quotes, word));
 })
 
+app.get('/quotes/search/author', function (req, res){
+  let author = req.query.author;
+  console.log(author);
+  let findAuthorMatching = (quotes, author)=>{
+    return quotes.filter((a)=>(a.author.toLowerCase().includes(author)));
+  }
+  res.send(findAuthorMatching(quotes, author));
+})
+
+app.get('/quotes/sample', function (req, res){
+  let randomQuote = sample(quotes);
+  res.send(randomQuote);
+})
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
@@ -73,8 +87,8 @@ function pickFromArray(arr) {
 }
 
 //Start our server so that it listens for HTTP requests!
-app.listen(3000, function () {
-  console.log("Server is listening on port 3000. Ready to accept requests!");
+app.listen(3003, function () {
+  console.log("Server is listening on port 3003. Ready to accept requests!");
 });
 
 
