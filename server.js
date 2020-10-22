@@ -16,7 +16,7 @@ const quotes = require("./quotes.json");
 let sample = require('lodash.sample');
 
 app.get("/", function(request, response) {
-  response.send("Ekip's Quote Server!  Ask me for '/', /Hello, /quotes/random, or /quotes");
+  response.send("Ekip's Quote Server!  Ask me for '/', /Hello, /quotes, /quotes/random, /quotes/search/term, /quotes/search/word and /quotes/search/author");
 });
 
 //START OF YOUR CODE...
@@ -34,26 +34,10 @@ app.get("/quotes/random", function(request, response) {
   response.send(randomQuote);
 });
 
-/* app.get ('/quotes/:theValue', function (request, response){
-  console.log(request.params);
-  response.send(request.params.theValue.toUpperCase())
-}); */
-
 app.get('/quotes/search/term', function (req, res){
   let term = req.query.term;
   res.send(`The search term you entered is: ${term}`);
 })
-
-/* app.get("/search", function(request, response) {
-  let life = request.query.life;
-  response.send(`The search for life quotes ${life}`);
-}); */
-
-
-/* app.get("/quotes/search", function(request, response) {
-  let word = request.query.word;  
-  response.send(`You said you want to search for: ${word}`);
-}); */
 
 app.get('/quotes/search/word', function (req, res){
   let word = req.query.word; 
